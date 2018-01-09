@@ -2,3 +2,26 @@
 发送无故停止；原因：发送错误使用DMA_PUSH...已解决
 接收中断不稳定；原因：AGC导致...待解决
 接收中断后查询first错误；原因不明...停止TX后不再查询first错误
+
+2018/01/19
+接收中断后查询first错误，接收数据结构体rx_dmadesc为：
+struct rx_dmadesc
+{
+    struct rx_hd hd;
+    struct phy_channel_info phy_info;
+    uint32_t pattern;
+    struct dma_desc dma_desc;
+};
+
+struct rx_hd
+{
+    uint32_t upatternrx;
+    uint32_t next;
+    ...
+    uint32_t statinfo;
+}
+
+rx_hd就是Rx Header Descriptor，由MACHW所维护
+
+
+
